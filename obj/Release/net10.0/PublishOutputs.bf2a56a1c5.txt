@@ -1,0 +1,7 @@
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/azure_webapp
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/appsettings.Development.json
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/appsettings.json
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/azure_webapp.dll
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/azure_webapp.deps.json
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/azure_webapp.runtimeconfig.json
+/Users/songbunchhoeun/Desktop/Projects/azure_webapp/bin/Release/net10.0/publish/azure_webapp.pdb

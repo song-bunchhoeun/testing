@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/net10.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/acb18d75-c574-49c8-a4d5-21c23c0b107e/resourceGroups/bunchhouen-test/providers/Microsoft.Web/sites/btesting"
+}
