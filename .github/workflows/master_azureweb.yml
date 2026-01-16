@@ -3,21 +3,16 @@ name: Build and deploy ASP.Net Core app to Azure Web App - azureweb
 on:
   push:
     branches: ["master"]
-    
   workflow_dispatch:
 
 env:
-  # UPDATE THIS: Change '.' to the folder name if your .csproj is in a subfolder
-  # Example: PROJECT_PATH: 'MyProjectFolder'
   PROJECT_PATH: '.' 
+  # Using a standard path for the build output
   OUTPUT_PATH: './publish'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
     steps:
       - uses: actions/checkout@v4
 
@@ -33,13 +28,14 @@ jobs:
         run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
 
       - name: dotnet publish
-        # Using a local path './publish' is more reliable than using system DOTNET_ROOT
+        # We publish to a specific folder
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -o ${{ env.OUTPUT_PATH }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
+          name: net-app-artifact
+          # Upload the contents of the publish folder
           path: ${{ env.OUTPUT_PATH }}
 
   deploy:
@@ -49,11 +45,12 @@ jobs:
       name: 'Production'
     
     steps:
+      # Download into the current working directory
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
-          path: ./deploy-package
+          name: net-app-artifact
+          path: .
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -61,6 +58,6 @@ jobs:
         with:
           app-name: 'azureweb'
           slot-name: 'Production'
-          # Point to the folder where the artifact was downloaded
-          package: ./deploy-package
+          # Use '.' so that the files in the current directory are zipped directly
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7C4B86217AFE49EA884D93037534B88B }}
